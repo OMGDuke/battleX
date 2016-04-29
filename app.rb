@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require_relative 'lib/player'
+require_relative 'lib/game'
 
 class BattleX < Sinatra::Base
   get '/' do
@@ -17,29 +18,39 @@ class BattleX < Sinatra::Base
   end
 
   post '/p1_set_name' do
-    $player_1 = Player.new params[:player_name]
-    redirect '/attack'
+    $game = Game.new(Player.new(params[:player_name]))
+    redirect '/first_attack'
   end
 
   post '/p2_set_name' do
-    $player_2 = Player.new params[:player_name]
+    @game = $game
+    @game.add_player_2(Player.new params[:player_name])
     redirect '/first_wait'
   end
 
-  get '/attack' do
-    erb :attack
-  end
-
   get '/first_wait' do
-    @player_2 = $player_2
+    @game = $game
     erb :first_wait
   end
 
+  get '/first_attack' do
+    @game = $game
+    @game.attack
+    erb :first_attack
+  end
+
+  get '/attack' do
+    @game = $game
+    @game.attack
+    @game.switch_turn
+    erb :attack
+  end
+
   get '/wait' do
-    @player_1 = $player_1
-    @player_2 = $player_2
+    @game = $game
     erb :wait
   end
+
 
   # start the server if ruby file executed directly
   run! if app_file == $0

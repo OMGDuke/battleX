@@ -12,4 +12,13 @@ class Game
     @player_2 = player_2
     @defender = @player_2
   end
+
+  def switch_turn
+    @defender = @defender == @player_1 ? @player_2 : @player_1
+    @attacker = @attacker == @player_1 ? @player_2 : @player_1
+  end
+
+  def attack
+    @defender.receive_damage
+  end
 end

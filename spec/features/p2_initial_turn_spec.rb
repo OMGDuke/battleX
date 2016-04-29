@@ -10,7 +10,10 @@ feature 'Player Two Turn One' do
   end
 
   context "press whisteling button" do
-    xscenario "show attacked msg" do
+    scenario "show attacked msg" do
+      p2_sign_in
+      click_button 'whistling'
+      expect(page).to have_content 
 
     end
 

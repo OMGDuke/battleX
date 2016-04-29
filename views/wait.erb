@@ -1,1 +1,6 @@
-<%=@player_1.name%> has attacked <%=@player_2.name%>
+<p><%=@game.attacker.name%> has attacked <%=@game.defender.name%></p>
+<p><%=@game.defender.name%>'s health is now at <%=@game.defender.hp%>hp</p>
+<br>
+<form action="/attack" method="get">
+ <button>Defend</button>
+</form>
