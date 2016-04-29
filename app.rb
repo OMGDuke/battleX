@@ -7,21 +7,33 @@ class BattleX < Sinatra::Base
   end
 
   get '/p1_char_select' do
-    erb :p1_char_select
+    @char = 1
+    erb :char_select
+  end
+
+  get '/p2_char_select' do
+    @char = 2
+    erb :char_select
   end
 
   post '/p1_set_name' do
-    $player_1 = Player.new params[:player_1_name]
-    redirect '/p1_attack'
+    $player_1 = Player.new params[:player_name]
+    redirect '/attack'
   end
 
-  get '/p1_attack' do
-    erb :p1_attack
+  post '/p2_set_name' do
+    $player_2 = Player.new params[:player_name]
+    redirect '/attack'
   end
 
-  get '/p1_wait' do
+  get '/attack' do
+    erb :attack
+  end
+
+  get '/wait' do
     @player_1 = $player_1
-    erb :p1_wait
+    @player_2 = $player_2
+    erb :wait
   end
 
   # start the server if ruby file executed directly
