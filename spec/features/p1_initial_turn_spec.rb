@@ -1,4 +1,4 @@
-feature 'Player One Attack' do
+feature 'Player One Turn One' do
   scenario 'Attack message' do
     p1_sign_in
     expect(page).to have_content 'Time to attack'
@@ -13,12 +13,6 @@ feature 'Player One Attack' do
     p1_sign_in
     click_button 'Attack'
     expect(page).to have_content 'Alex has attacked Fergus '
-  end
-
-  scenario 'Attack button launches attack' do
-    p2_sign_in
-    click_button 'Attack'
-    expect(page).to have_content 'Fergus has attacked Alex '
   end
 
 

@@ -23,11 +23,16 @@ class BattleX < Sinatra::Base
 
   post '/p2_set_name' do
     $player_2 = Player.new params[:player_name]
-    redirect '/attack'
+    redirect '/first_wait'
   end
 
   get '/attack' do
     erb :attack
+  end
+
+  get '/first_wait' do
+    @player_2 = $player_2
+    erb :first_wait
   end
 
   get '/wait' do
